@@ -70,7 +70,7 @@ for (var i = 0; i < args.Length; i++)
                   --reset-config      repose les questions de configuration
                   --overlay-preview <fichier.png>   enregistre des aperçus de l'overlay puis quitte
                 """, """
-                Fortnite Chest Counter
+                toomanychests
 
                 Options:
                   --lang <fr|en|es>   language of the tool (French, English or Spanish)
@@ -121,7 +121,7 @@ if (previewPath == null && !AcquireInstance(instance, afterUpdate ? TimeSpan.Fro
         "El contador de cofres ya está abierto: búscalo en la barra de tareas.");
     if (gui && OperatingSystem.IsWindows())
     {
-        System.Windows.Forms.MessageBox.Show(alreadyOpen, "Chest Counter", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+        System.Windows.Forms.MessageBox.Show(alreadyOpen, Brand.Name, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
     }
     else
     {
@@ -147,7 +147,7 @@ if (L.Normalize(config.Language) == null)
 }
 L.Set(config.Language);
 config.ApplyTimeSettings();
-var appName = L.T("Compteur de coffres Fortnite", "Fortnite Chest Counter", "Contador de cofres de Fortnite");
+var appName = Brand.Name;
 
 if (demosArg != null) config.DemosFolder = demosArg;
 var defaultDemos = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FortniteGame", "Saved", "Demos");
@@ -428,7 +428,8 @@ tracker.BetweenFiles = () =>
 tracker.StopRequested = () => quit;
 
 nextScan = DateTime.UtcNow.AddSeconds(backlog > 0 ? 1 : 2);
-var reportWeek = TreasureCatalog.ShownWeek(DateTime.UtcNow)?.Number;
+var reportWeek = TreasureCatalog.WeekOf(DateTime.UtcNow)?.From;
+var oddsBoundary = WeekendOdds.NextBoundary(DateTime.UtcNow);
 while (!quit)
 {
     if (DateTime.UtcNow >= nextScan)
@@ -467,11 +468,18 @@ while (!quit)
 
     // A new treasure week (Sunday): the chances of the weekly treasures start again from that week's chests, even for
     // a counter left open with no match played.
-    var shownWeek = TreasureCatalog.ShownWeek(DateTime.UtcNow)?.Number;
-    if (shownWeek != reportWeek)
+    var currentWeek = TreasureCatalog.WeekOf(DateTime.UtcNow)?.From;
+    if (currentWeek != reportWeek)
     {
-        reportWeek = shownWeek;
+        reportWeek = currentWeek;
         ReportWriter.WriteAll(store, config, data);
+    }
+
+    if (DateTime.UtcNow >= oddsBoundary)
+    {
+        oddsBoundary = WeekendOdds.NextBoundary(DateTime.UtcNow);
+        ReportWriter.WriteAll(store, config, data);
+        UpdateOverlay(store, config, data, tracker.LiveMatch, tracker.IsLive);
     }
 
     if (Volatile.Read(ref imagesAdded))
@@ -509,7 +517,7 @@ while (!quit)
     }
 
     // Sleep until something happens (file change, action from the window) or the next scheduled scan.
-    var wait = nextScan - DateTime.UtcNow;
+    var wait = (oddsBoundary < nextScan ? oddsBoundary : nextScan) - DateTime.UtcNow;
     if (wait > TimeSpan.Zero && wake.WaitOne(wait))
     {
         // A file change: check again within 2 s (the readiness checks decide when a replay is complete).
@@ -560,6 +568,8 @@ void StartOverlay()
         config.OverlayStyle = "hud"; // a style tried in a test version and removed since
     }
     NativeOverlay.SetStyle(config.OverlayStyle);
+    // Size the first frame for the real totals, so restoring the position does not shift it on startup.
+    UpdateOverlay(store, config, data, tracker.LiveMatch, tracker.IsLive);
     NativeOverlay.Start(config.OverlayX, config.OverlayY, config.OverlayLocked,
         (x, y) =>
         {
@@ -572,7 +582,6 @@ void StartOverlay()
             config.OverlayLocked = locked;
             try { store.SaveConfig(config); } catch { /* ignore */ }
         });
-    UpdateOverlay(store, config, data, tracker.LiveMatch, tracker.IsLive);
 }
 
 void ToggleOverlay()
@@ -597,9 +606,9 @@ void ToggleStartWithFortnite()
         return;
     }
     Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine(L.T("Ouvrir avec Fortnite : impossible ici, lance le compteur depuis ChestCounter.exe.",
-        "Open with Fortnite: not possible here, run the counter from ChestCounter.exe.",
-        "Abrir con Fortnite: no es posible aquí, abre el contador desde ChestCounter.exe."));
+    Console.WriteLine(L.T("Ouvrir avec Fortnite : impossible ici, lance le compteur depuis toomanychests.exe.",
+        "Open with Fortnite: not possible here, run the counter from toomanychests.exe.",
+        "Abrir con Fortnite: no es posible aquí, abre el contador desde toomanychests.exe."));
     Console.ResetColor();
 }
 
@@ -631,7 +640,7 @@ string? UninstallNow(bool deleteData)
 {
     if (!OperatingSystem.IsWindows() || AppInfo.ExePath is not { } exe)
     {
-        return "ChestCounter.exe";
+        return Brand.Executable;
     }
     // Nothing may start again: no entry at Windows logon, no standby (it would keep the exe in use).
     FortniteWatch.Apply(false, dataDir);
@@ -897,6 +906,7 @@ object BuildGuiState()
         autoClose = autoCloseAt != null,
         status = new { kind, text },
         total = L.N(view.TotalChests),
+        tokenChance = ReportWriter.CurrentTokenChance,
         manual = view.ManualAdjust,
         manualText = (view.ManualAdjust > 0 ? "+" : "") + L.N(view.ManualAdjust),
         // "Opened this week" is offered while a treasure week is running (its number).
@@ -1032,7 +1042,7 @@ object? RunGuiAction(string name, System.Text.Json.JsonElement value)
             {
                 config.Language = code;
                 L.Set(code);
-                appName = L.T("Compteur de coffres Fortnite", "Fortnite Chest Counter", "Contador de cofres de Fortnite");
+                appName = Brand.Name;
             }
             break;
         case "profile": if (Profiles.List(data).Any(p => p.Key == Str())) config.Profile = Str(); break;
@@ -1167,7 +1177,7 @@ static void UpdateOverlay(Store store, Config config, TrackerData d, MatchRecord
     ReportWriter.OverlayStyle = config.OverlayStyle;
     var view = OverlayModel.Build(Profiles.View(d, config), live, inProgress, config.ShowSquadTotal);
     ReportWriter.WriteOverlay(store, view);
-    if (OperatingSystem.IsWindows() && NativeOverlay.IsRunning)
+    if (OperatingSystem.IsWindows())
     {
         NativeOverlay.Update(view);
     }

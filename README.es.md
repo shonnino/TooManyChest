@@ -12,7 +12,7 @@
 
 <img src="docs/overlay-es.png" alt="Overlay entre dos partidas" height="150">&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/overlay-match-es.png" alt="Overlay durante una partida" height="150">
 
-[**⬇ Descargar ChestCounter.exe**](../../releases/latest) · Windows 10 / 11 · gratis · sin instalación
+[**⬇ Descargar toomanychests.exe**](../../releases/latest) · Windows 10 / 11 · gratis · sin instalación
 
 </div>
 
@@ -40,9 +40,9 @@ Como Fortnite solo escribe la clave de descifrado de la repetición al terminar 
 
 ## Para empezar
 
-1. Descarga **[`ChestCounter.exe`](../../releases/latest)**. Este único archivo es todo lo que necesitas.
+1. Descarga **[`toomanychests.exe`](../../releases/latest)**. Este único archivo es todo lo que necesitas.
 2. Activa las repeticiones en Fortnite (ver arriba).
-3. Ejecuta `ChestCounter.exe`.
+3. Ejecuta `toomanychests.exe`.
    > Windows puede mostrar «Windows protegió tu PC» porque el exe no está firmado. Haz clic en *Más información → Ejecutar de todas formas*.
 4. Se abre la ventana del contador. Ninguna pregunta: la tarjeta **Bienvenido** ajusta los tres puntos importantes (siguen en **Ajustes**), y las repeticiones que ya están en tu PC se cuentan enseguida.
 
@@ -65,7 +65,7 @@ Cinco pestañas: **Inicio**, **Informe**, **Overlay**, **Ajustes** y **Ayuda**. 
 
 <p align="center"><img src="docs/home-es.png" alt="Pestaña Inicio" width="820"></p>
 
-La cruz de la ventana pregunta antes de detener el contador (una partida jugada con el contador cerrado no se cuenta). Volver a abrir `ChestCounter.exe` trae la ventana al frente.
+La cruz de la ventana pregunta antes de detener el contador (una partida jugada con el contador cerrado no se cuenta). Volver a abrir `toomanychests.exe` trae la ventana al frente.
 
 ### Los cofres abiertos antes del contador
 
@@ -90,7 +90,7 @@ Haz clic en el **lápiz** de *Cofres en total* (Inicio o Informe) para añadir l
 
 ## Abrir con Fortnite
 
-Con esta opción, un pequeño proceso invisible se inicia con Windows y comprueba cada pocos segundos si Fortnite está abierto. No lee nada del juego: solo mira la lista de programas abiertos. Cuando se inicia Fortnite, abre el contador minimizado (el juego conserva la pantalla). Cuando se cierra Fortnite, el contador cuenta tu última partida y se cierra 30 segundos después; **Mantener el contador abierto** en el Inicio (o volver a abrir `ChestCounter.exe`) lo mantiene abierto. Se puede desactivar en cualquier momento en **Ajustes**: el proceso invisible se detiene y se quita del inicio de Windows. Mientras la opción está activada, el proceso invisible sigue funcionando después de cerrar el contador, así que Windows no deja borrar ni mover `ChestCounter.exe`. Desactiva antes la opción, o usa **Ayuda → Desinstalar**.
+Con esta opción, un pequeño proceso invisible se inicia con Windows y comprueba cada pocos segundos si Fortnite está abierto. No lee nada del juego: solo mira la lista de programas abiertos. Cuando se inicia Fortnite, abre el contador minimizado (el juego conserva la pantalla). Cuando se cierra Fortnite, el contador cuenta tu última partida y se cierra 30 segundos después; **Mantener el contador abierto** en el Inicio (o volver a abrir `toomanychests.exe`) lo mantiene abierto. Se puede desactivar en cualquier momento en **Ajustes**: el proceso invisible se detiene y se quita del inicio de Windows. Mientras la opción está activada, el proceso invisible sigue funcionando después de cerrar el contador, así que Windows no deja borrar ni mover `toomanychests.exe`. Desactiva antes la opción, o usa **Ayuda → Desinstalar**.
 
 ## El overlay
 
@@ -175,11 +175,11 @@ Para empezar de cero, borra esta carpeta (o conserva `data.json` para mantener t
 
 **«No se puede leer esta repetición».** Una actualización de Fortnite puede cambiar el formato de las repeticiones; entonces hay que actualizar el lector. Las partidas ya contadas se conservan. [Abre una issue](../../issues) con `errors.log` adjunto (**Ayuda → Abrir el registro de errores**).
 
-**No puedo borrar `ChestCounter.exe` («el archivo está abierto en otro programa»): ¿por qué?** Con **Abrir con Fortnite** activado, un pequeño proceso invisible usa el exe todo el tiempo, incluso con el contador cerrado. Dos soluciones:
+**No puedo borrar `toomanychests.exe` («el archivo está abierto en otro programa»): ¿por qué?** Con **Abrir con Fortnite** activado, un pequeño proceso invisible usa el exe todo el tiempo, incluso con el contador cerrado. Dos soluciones:
 - **Ayuda → Desinstalar ChestCounter**: desactiva la opción, cierra el contador y borra el exe. Eliges si conservar tu historial y tus ajustes (`%APPDATA%\ChestCounter`, útil si lo vuelves a instalar más adelante) o borrarlo todo.
-- O desactiva **Ajustes → Abrir con Fortnite**, cierra el contador y borra `ChestCounter.exe` tú mismo.
+- O desactiva **Ajustes → Abrir con Fortnite**, cierra el contador y borra `toomanychests.exe` tú mismo.
 
-**¿Dónde está la ventana?** Con **Ajustes → Minimizar al área de notificación** activado, el contador minimizado está junto al reloj, abajo a la derecha de la barra de tareas (icono del cofre, a veces detrás de la pequeña flecha ^); un clic encima lo vuelve a abrir. Volver a abrir `ChestCounter.exe` también lo trae de vuelta.
+**¿Dónde está la ventana?** Con **Ajustes → Minimizar al área de notificación** activado, el contador minimizado está junto al reloj, abajo a la derecha de la barra de tareas (icono del cofre, a veces detrás de la pequeña flecha ^); un clic encima lo vuelve a abrir. Volver a abrir `toomanychests.exe` también lo trae de vuelta.
 
 **La ventana se queda en blanco o se abre en mi navegador.** La ventana usa Microsoft Edge WebView2, integrado en Windows 11 e instalado en casi todos los Windows 10. Sin él, el contador abre la misma página en tu navegador. Puedes instalarlo desde la web de [Microsoft](https://developer.microsoft.com/microsoft-edge/webview2/) (*Evergreen Bootstrapper*).
 
@@ -190,17 +190,17 @@ Para empezar de cero, borra esta carpeta (o conserva `data.json` para mantener t
 ## Opciones de línea de comandos
 
 ```
-ChestCounter.exe --lang <fr|en|es>   cambiar el idioma
-ChestCounter.exe --demos <carpeta>   otra carpeta de repeticiones
-ChestCounter.exe --data <carpeta>    otra carpeta de datos
-ChestCounter.exe --once              analiza las repeticiones terminadas y sale (escribe en la terminal)
-ChestCounter.exe --reset-config      olvida los ajustes (tu historial se conserva)
-ChestCounter.exe --overlay-preview <archivo.png>   guarda vistas previas del overlay y sale
+toomanychests.exe --lang <fr|en|es>   cambiar el idioma
+toomanychests.exe --demos <carpeta>   otra carpeta de repeticiones
+toomanychests.exe --data <carpeta>    otra carpeta de datos
+toomanychests.exe --once              analiza las repeticiones terminadas y sale (escribe en la terminal)
+toomanychests.exe --reset-config      olvida los ajustes (tu historial se conserva)
+toomanychests.exe --overlay-preview <archivo.png>   guarda vistas previas del overlay y sale
 ```
 
 ## Compilarlo uno mismo
 
-Instala el [SDK de .NET 10](https://dotnet.microsoft.com/download/dotnet/10.0) (Windows x64) y haz doble clic en **`build.bat`**: el exe se escribe en `dist\ChestCounter.exe`. El workflow de GitHub Actions compila el exe en cada push y lo adjunta a una release cuando se sube un tag `v*`, con el texto de [`RELEASE_NOTES.md`](RELEASE_NOTES.md) (también se muestra en el contador después de una actualización).
+Instala el [SDK de .NET 10](https://dotnet.microsoft.com/download/dotnet/10.0) (Windows x64) y haz doble clic en **`build.bat`**: el exe se escribe en `dist\toomanychests.exe`. El workflow de GitHub Actions compila el exe en cada push y lo adjunta a una release cuando se sube un tag `v*`, con el texto de [`RELEASE_NOTES.md`](RELEASE_NOTES.md) (también se muestra en el contador después de una actualización).
 
 ## Licencia y créditos
 

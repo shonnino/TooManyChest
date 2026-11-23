@@ -77,7 +77,7 @@ public static class ReleaseNotes
 }
 
 /// <summary>
-/// Checks the latest GitHub release and replaces ChestCounter.exe with it. The running exe is renamed (Windows allows
+/// Checks the latest GitHub release and replaces toomanychests.exe with it. The running exe is renamed (Windows allows
 /// that), the new one takes its place and is started; the old file is deleted at the next launch.
 /// Can be turned off in the settings (the only other network access: the treasure pictures, downloaded once).
 /// </summary>
@@ -119,7 +119,7 @@ public static class Updater
         }
     }
 
-    /// <summary>The release described by the GitHub API answer, if it is newer and carries ChestCounter.exe.</summary>
+    /// <summary>The release described by the GitHub API answer, if it is newer and carries toomanychests.exe.</summary>
     private static UpdateInfo? Parse(string json)
     {
         try
@@ -138,7 +138,7 @@ public static class Updater
             }
             foreach (var asset in root.GetProperty("assets").EnumerateArray())
             {
-                if (!string.Equals(asset.GetProperty("name").GetString(), "ChestCounter.exe", StringComparison.OrdinalIgnoreCase))
+                if (!string.Equals(asset.GetProperty("name").GetString(), Brand.Executable, StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
@@ -167,7 +167,7 @@ public static class Updater
         var exe = AppInfo.ExePath;
         if (exe == null)
         {
-            return L.T("mise à jour possible seulement depuis ChestCounter.exe", "update only possible from ChestCounter.exe", "actualización posible solo desde ChestCounter.exe");
+            return L.T("mise à jour possible seulement depuis toomanychests.exe", "update only possible from toomanychests.exe", "actualización posible solo desde toomanychests.exe");
         }
         var download = exe + ".download";
         var old = exe + ".old";
@@ -231,7 +231,7 @@ public static class Updater
         {
             return;
         }
-        foreach (var f in Directory.EnumerateFiles(dir, "ChestCounter.exe.*"))
+        foreach (var f in Directory.EnumerateFiles(dir, Brand.Executable + ".*"))
         {
             if (f.EndsWith(".old", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".download", StringComparison.OrdinalIgnoreCase))
             {

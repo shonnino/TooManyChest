@@ -2,7 +2,7 @@ namespace ChestCounter;
 
 /// <summary>
 /// Pictures of the treasure collection, downloaded once into the data folder ("images"): the report shows the local
-/// copies, so opening or refreshing it never calls the internet. They come from the project's GitHub repository
+/// copies, so opening or refreshing it never calls the internet. They come from the embedded assets, the project's GitHub repository
 /// (assets/treasures, always available), or from fortnite.bot for a picture not added to the repository yet.
 /// Downloaded even with the updates turned off: the report needs them, and they are only pictures.
 /// </summary>
@@ -67,6 +67,17 @@ public static class TreasureImages
                 if (File.Exists(path))
                 {
                     continue;
+                }
+                using (var image = typeof(TreasureImages).Assembly.GetManifestResourceStream("treasure-image/" + LocalName(url)))
+                {
+                    if (image != null)
+                    {
+                        var temp = path + ".tmp";
+                        using (var output = File.Create(temp)) await image.CopyToAsync(output);
+                        File.Move(temp, path, overwrite: true);
+                        added++;
+                        continue;
+                    }
                 }
                 foreach (var source in new[] { RepoUrl(url), url })
                 {

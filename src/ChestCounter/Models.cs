@@ -147,6 +147,7 @@ public sealed class MatchRecord
     /// what the vehicle destroyed in this replay, so chests are missing from the count (see GitHub issue 8).
     /// </summary>
     public int UnrecordedVehicleLoot { get; set; }
+    public int ReplayChestRecordingErrors { get; set; }
 
     /// <summary>From this many unexplained piles on, the match is flagged (one or two can be somebody else's loot).</summary>
     [JsonIgnore] public bool VehicleChestsMissing => UnrecordedVehicleLoot >= 3;

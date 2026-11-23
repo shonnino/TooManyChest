@@ -2,21 +2,21 @@
 
 **English** · [Français](README.fr.md) · [Español](README.es.md)
 
-<img src="docs/icon.png" alt="" width="88">
+<img src="src/ChestCounter/Assets/toomanychests.png" alt="" width="88">
 
-# Fortnite Chest Counter
+# TooManyChest
 
-[![version](https://img.shields.io/github/v/release/LED-N/Fortnite-ChestCounter?style=flat-square&label=version&color=e8b04b)](../../releases/latest) [![downloads](https://img.shields.io/github/downloads/LED-N/Fortnite-ChestCounter/total?style=flat-square&label=downloads&color=e8b04b)](../../releases) ![Windows 10 | 11](https://img.shields.io/badge/Windows-10%20%7C%2011-3a7bd5?style=flat-square) [![license](https://img.shields.io/github/license/LED-N/Fortnite-ChestCounter?style=flat-square&label=license&color=555)](LICENSE)
+[![version](https://img.shields.io/github/v/release/shonnino/TooManyChest?style=flat-square&label=version&color=e8b04b)](../../releases/latest) [![downloads](https://img.shields.io/github/downloads/shonnino/TooManyChest/total?style=flat-square&label=downloads&color=e8b04b)](../../releases) ![Windows 10 | 11](https://img.shields.io/badge/Windows-10%20%7C%2011-3a7bd5?style=flat-square) [![license](https://img.shields.io/github/license/shonnino/TooManyChest?style=flat-square&label=license&color=555)](LICENSE)
 
 **Counts every chest you open in Fortnite, match after match, with an overlay that blends into the game.**
 
-<img src="docs/overlay-en.png" alt="Overlay between two matches" height="150">&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/overlay-match-en.png" alt="Overlay during a match" height="150">
-
-[**⬇ Download ChestCounter.exe**](../../releases/latest) · Windows 10 / 11 · free · no install
+[**⬇ Download toomanychests.exe**](../../releases/latest) · Windows 10 / 11 · free · no install
 
 </div>
 
 ---
+
+TooManyChest is a customized fork of [LED-N's Fortnite Chest Counter](https://github.com/LED-N/Fortnite-ChestCounter). It uses the original version 1.5.1 replay counter and refreshes existing counts from replays still on disk.
 
 Chest Counter reads the replays Fortnite saves after each match and keeps a running count of the chests you opened, along with the **treasure hunt treasures** you got from your chests. A transparent overlay shows your figures over the game, like the rest of the HUD, and the counter's window keeps your whole history, your chances of getting the gold outfit and your collection of treasures.
 
@@ -40,9 +40,9 @@ Because Fortnite only writes the replay's decryption key when the match ends, ch
 
 ## Getting started
 
-1. Download **[`ChestCounter.exe`](../../releases/latest)**. This single file is all you need.
+1. Download **[`toomanychests.exe`](../../releases/latest)**. This single file is all you need.
 2. Turn on replays in Fortnite (see above).
-3. Run `ChestCounter.exe`.
+3. Run `toomanychests.exe`.
    > Windows may show *"Windows protected your PC"* because the exe is not signed. Click *More info → Run anyway*.
 4. The counter's window opens. No questions to answer: the **Welcome** card sets the three things that matter (they stay in **Settings**), and the replays already on your PC are counted right away.
 
@@ -65,7 +65,7 @@ Five tabs: **Home**, **Report**, **Overlay**, **Settings** and **Help**. At the 
 
 <p align="center"><img src="docs/home-en.png" alt="Home tab" width="820"></p>
 
-The close button asks before stopping the counter (a match played while it is closed is not counted). Starting `ChestCounter.exe` again brings the window back to the front.
+The close button asks before stopping the counter (a match played while it is closed is not counted). Starting `toomanychests.exe` again brings the window back to the front.
 
 ### Chests opened before the counter
 
@@ -90,7 +90,7 @@ Click the **pencil** of *Chests in total* (Home or Report) to add the chests you
 
 ## Open with Fortnite
 
-With this option, a tiny invisible process starts with Windows and checks every few seconds whether Fortnite is running. It reads nothing from the game: it only looks at the list of running programs. When Fortnite starts, it opens the counter minimized (the game keeps the screen). When Fortnite closes, the counter counts your last match, then closes 30 seconds later; **Keep the counter open** on the Home tab (or starting `ChestCounter.exe` again) keeps it open. Can be turned off at any time in **Settings**: the invisible process stops and is removed from the Windows startup. While the option is on, the invisible process keeps running after you quit the counter, so Windows refuses to delete or move `ChestCounter.exe`. Turn the option off first, or use **Help → Uninstall**.
+With this option, a tiny invisible process starts with Windows and checks every few seconds whether Fortnite is running. It reads nothing from the game: it only looks at the list of running programs. When Fortnite starts, it opens the counter minimized (the game keeps the screen). When Fortnite closes, the counter counts your last match, then closes 30 seconds later; **Keep the counter open** on the Home tab (or starting `toomanychests.exe` again) keeps it open. Can be turned off at any time in **Settings**: the invisible process stops and is removed from the Windows startup. While the option is on, the invisible process keeps running after you quit the counter, so Windows refuses to delete or move `toomanychests.exe`. Turn the option off first, or use **Help → Uninstall**.
 
 ## The overlay
 
@@ -175,11 +175,11 @@ To start over, delete this folder (or keep `data.json` to keep your history). If
 
 **"Cannot read this replay".** A Fortnite update can change the replay format; the parser then needs an update. Matches already counted are kept. [Open an issue](../../issues) with `errors.log` attached (**Help → Open the error log**).
 
-**I can't delete `ChestCounter.exe` ("the file is open in another program"): why?** With **Open with Fortnite** on, a small invisible process keeps using the exe, even with the counter closed. Two ways out:
+**I can't delete `toomanychests.exe` ("the file is open in another program"): why?** With **Open with Fortnite** on, a small invisible process keeps using the exe, even with the counter closed. Two ways out:
 - **Help → Uninstall ChestCounter**: it turns the option off, closes the counter and deletes the exe. You choose whether to keep your history and settings (`%APPDATA%\ChestCounter`, handy if you reinstall later) or to delete everything.
-- Or set **Settings → Open with Fortnite** to *off*, close the counter, then delete `ChestCounter.exe` yourself.
+- Or set **Settings → Open with Fortnite** to *off*, close the counter, then delete `toomanychests.exe` yourself.
 
-**Where did the window go?** With **Settings → Minimize to the notification area** on, a minimized counter is next to the clock, at the bottom right of the taskbar (chest icon, sometimes behind the small ^ arrow); a click on it opens it again. Starting `ChestCounter.exe` again also brings it back.
+**Where did the window go?** With **Settings → Minimize to the notification area** on, a minimized counter is next to the clock, at the bottom right of the taskbar (chest icon, sometimes behind the small ^ arrow); a click on it opens it again. Starting `toomanychests.exe` again also brings it back.
 
 **The window stays blank or opens in my browser.** The window uses Microsoft Edge WebView2, built into Windows 11 and installed on almost every Windows 10. Without it, the counter opens the same page in your browser. You can install it from [Microsoft](https://developer.microsoft.com/microsoft-edge/webview2/) (*Evergreen Bootstrapper*).
 
@@ -190,17 +190,17 @@ To start over, delete this folder (or keep `data.json` to keep your history). If
 ## Command line options
 
 ```
-ChestCounter.exe --lang <fr|en|es>   change the language
-ChestCounter.exe --demos <folder>    another replays folder
-ChestCounter.exe --data <folder>     another data folder
-ChestCounter.exe --once              analyze the finished replays, then quit (writes into the terminal)
-ChestCounter.exe --reset-config      forget the settings (your history is kept)
-ChestCounter.exe --overlay-preview <file.png>   save previews of the overlay, then quit
+toomanychests.exe --lang <fr|en|es>   change the language
+toomanychests.exe --demos <folder>    another replays folder
+toomanychests.exe --data <folder>     another data folder
+toomanychests.exe --once              analyze the finished replays, then quit (writes into the terminal)
+toomanychests.exe --reset-config      forget the settings (your history is kept)
+toomanychests.exe --overlay-preview <file.png>   save previews of the overlay, then quit
 ```
 
 ## Build it yourself
 
-Install the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) (Windows x64), then double-click **`build.bat`**: the exe is written to `dist\ChestCounter.exe`. The GitHub Actions workflow builds the exe on every push and attaches it to a release when a `v*` tag is pushed, with the text of [`RELEASE_NOTES.md`](RELEASE_NOTES.md) (also shown in the counter after an update).
+Install the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) for Windows x64, then double-click **`build.bat`**. The executable is written to `dist\toomanychests.exe`. GitHub Actions builds the executable on every push and attaches it to a release when a `v*` tag is pushed.
 
 ## License and credits
 

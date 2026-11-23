@@ -10,7 +10,7 @@ namespace ChestCounter;
 /// The window of the graphical interface: a real Windows window that shows the page of <see cref="GuiServer"/> with
 /// WebView2 (the Edge engine built into Windows 10 and 11). Unlike a browser window, the counter controls it:
 /// the close button asks before stopping the counter, minimizing goes to the taskbar or, if chosen, to the notification
-/// area, and starting ChestCounter.exe again brings it back.
+/// area, and starting toomanychests.exe again brings it back.
 /// Memory: minimized to the taskbar, the page is suspended; in the notification area (or opened with Fortnite and not
 /// shown yet), the web engine is not running at all and is started again when the window is opened.
 /// Runs on its own thread (Windows Forms needs one); the counter keeps its main loop.
@@ -18,7 +18,7 @@ namespace ChestCounter;
 [SupportedOSPlatform("windows")]
 public static class GuiWindow
 {
-    private static readonly System.Drawing.Color Night = System.Drawing.Color.FromArgb(15, 27, 36);
+    private static readonly System.Drawing.Color WindowBlue = System.Drawing.Color.FromArgb(22, 71, 134);
 
     private static Form? _form;
     private static WebView2? _view;
@@ -63,7 +63,7 @@ public static class GuiWindow
                 Width = 1200,
                 Height = 900,
                 StartPosition = FormStartPosition.CenterScreen,
-                BackColor = Night,
+                BackColor = WindowBlue,
                 Icon = icon,
                 MinimumSize = new System.Drawing.Size(560, 480),
             };
@@ -166,7 +166,7 @@ public static class GuiWindow
         {
             return;
         }
-        var view = new WebView2 { Dock = DockStyle.Fill, DefaultBackgroundColor = Night };
+        var view = new WebView2 { Dock = DockStyle.Fill, DefaultBackgroundColor = WindowBlue };
         _view = view;
         form.Controls.Add(view);
         try

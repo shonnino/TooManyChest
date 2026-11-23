@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "revision": 1,
-  "updated": "2026-11-11",
+  "revision": 6,
+  "updated": "2026-11-22",
   "about": "Treasure hunt data shown by Chest Counter (report, odds, collection). Edit it on main and raise 'revision': every counter picks it up at its next start. Schema in src/ChestCounter/TreasureCatalog.cs.",
   "sources": {
     "odds": "https://x.com/FortniteStatus/status/2119202610322227327",
@@ -165,21 +165,154 @@
       "start": "2026-11-15T14:00:00Z",
       "end": "2026-11-22T14:00:00Z",
       "title": "Miku & Teto Arrive",
-      "prizes": []
+      "prizes": [
+        {
+          "id": "w3-outfit",
+          "kind": "outfit",
+          "name": "Solid Gold Miku",
+          "image": "https://cdn.fortnite.bot/s43treasure/w3-outfit.webp",
+          "prizeIds": [
+            "DelilahPrize:dpid_item19"
+          ]
+        },
+        {
+          "id": "w3-backbling",
+          "kind": "pickaxe",
+          "name": "Miku's Takarabako",
+          "image": "https://cdn.fortnite.bot/s43treasure/w3-backbling.webp",
+          "prizeIds": [
+            "DelilahPrize:dpid_item20"
+          ]
+        },
+        {
+          "id": "w3-car",
+          "kind": "car",
+          "name": "Gold Chevrolet Corvette ZR1 Decal",
+          "image": "https://cdn.fortnite.bot/s43treasure/w3-car.webp?2",
+          "prizeIds": [
+            "DelilahPrize:dpid_item23"
+          ]
+        },
+        {
+          "id": "w3-jam",
+          "kind": "jam",
+          "name": "PPPP",
+          "image": "https://cdn.fortnite.bot/s43treasure/w3-jamtrack.webp?2",
+          "prizeIds": [
+            "DelilahPrize:dpid_item21"
+          ]
+        },
+        {
+          "id": "w3-loading",
+          "kind": "loading",
+          "name": "May Fortune Find You",
+          "image": "https://cdn.fortnite.bot/s43treasure/w3-loading.webp",
+          "prizeIds": [
+            "DelilahPrize:dpid_item22"
+          ]
+        }
+      ]
     },
     {
       "number": 4,
       "start": "2026-11-22T14:00:00Z",
       "end": "2026-11-29T14:00:00Z",
       "title": "Oscar Arrives",
-      "prizes": []
+      "prizes": [
+        {
+          "id": "w4-outfit",
+          "kind": "outfit",
+          "name": "Solid Gold Kasane Teto",
+          "prizeIds": [
+            "DelilahPrize:dpid_item24"
+          ],
+          "image": "https://fortnite-api.com/images/cosmetics/br/character_yarnpuzzling/icon.png?v=w4outfit"
+        },
+        {
+          "id": "w4-pickaxe",
+          "kind": "pickaxe",
+          "name": "Solid Gold High Tide and Wavecutter",
+          "prizeIds": [
+            "DelilahPrize:dpid_item25"
+          ],
+          "image": "https://fortnite-api.com/images/cosmetics/br/backpack_juniperburlapgold/icon.png?v=w4pickaxe"
+        },
+        {
+          "id": "w4-car",
+          "kind": "car",
+          "name": "Gold Lamborghini Urus SE Decal",
+          "prizeIds": [
+            "DelilahPrize:dpid_item28"
+          ],
+          "image": "https://rocket-league.com/content/media/items/avatar/256px/decals/lamborghini-urus-se/golden-llama-crew-e5be1cc4b91793520238-render.png"
+        },
+        {
+          "id": "w4-jam",
+          "kind": "jam",
+          "name": "Wellerman",
+          "prizeIds": [
+            "DelilahPrize:dpid_item26"
+          ],
+          "image": "https://cdn.fortnite-api.com/tracks/c572cf547b41f621.jpg"
+        },
+        {
+          "id": "w4-loading",
+          "kind": "loading",
+          "name": "Oscar's Wraps",
+          "prizeIds": [
+            "DelilahPrize:dpid_item27"
+          ],
+          "image": "https://fortnite-api.com/images/cosmetics/br/loadingscreen_delilahthw4/featured.png?v=w4loading"
+        }
+      ]
     },
     {
       "number": 5,
       "start": "2026-11-29T14:00:00Z",
       "end": "2026-12-05T14:00:00Z",
       "title": "The Final Hunt",
-      "prizes": []
+      "prizes": [
+        {
+          "id": "w5-outfit",
+          "kind": "outfit",
+          "name": "Week 5 Gold Outfit",
+          "prizeIds": [
+            "DelilahPrize:dpid_item29"
+          ]
+        },
+        {
+          "id": "w5-pickaxe",
+          "kind": "pickaxe",
+          "name": "Week 5 Pickaxe or Back Bling",
+          "prizeIds": [
+            "DelilahPrize:dpid_item30"
+          ]
+        },
+        {
+          "id": "w5-jam",
+          "kind": "jam",
+          "name": "Week 5 Jam Track",
+          "prizeIds": [
+            "DelilahPrize:dpid_item31"
+          ]
+        },
+        {
+          "id": "w5-loading",
+          "kind": "loading",
+          "name": "Week 5 Loading Screen",
+          "prizeIds": [
+            "DelilahPrize:dpid_item32"
+          ]
+        },
+        {
+          "id": "w5-car",
+          "kind": "car",
+          "name": "Week 5 Vehicle & Decal",
+          "prizeIds": [
+            "DelilahPrize:dpid_item33"
+          ]
+        }
+      ]
     }
   ],
   "treasureHours": [
@@ -205,13 +338,13 @@
     },
     {
       "start": "2026-11-14T19:00:00Z",
-      "end": "2026-11-14T21:00:00Z",
+      "end": "2026-11-14T23:00:00Z",
       "boosts": {
         "outfit": 7.5,
         "pirate-shop": 1.5,
         "car": 10
       },
-      "confirmed": false
+      "confirmed": true
     },
     {
       "start": "2026-11-15T02:00:00Z",

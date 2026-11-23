@@ -211,7 +211,7 @@ public sealed class ReplayAnalyzer : FortniteReplayReader.ReplayReader
     private readonly List<GrantEvent> _grants = new();
 
     /// <summary>Bump when the analysis changes so that existing replays are re-analyzed.</summary>
-    public const int CurrentVersion = 17; // 17 (1.5.1): closed chests broken without an instigator counted again
+    public const int CurrentVersion = 23; // Restore the 1.5.1 analysis and refresh records saved by earlier fork builds.
 
     private static readonly bool ProbeDebug = Environment.GetEnvironmentVariable("CHESTCOUNTER_DEBUG") == "4";
 

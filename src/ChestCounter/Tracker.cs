@@ -570,6 +570,9 @@ public sealed class Tracker
             return false;
         }
 
+        var backup = _store.DataPath + $".before-analyzer-{ReplayAnalyzer.CurrentVersion}.bak";
+        if (File.Exists(_store.DataPath) && !File.Exists(backup)) File.Copy(_store.DataPath, backup);
+
         var hadData = _data.Matches.Count > 0;
         foreach (var key in _data.ProcessedFiles.Where(kv => kv.Value != "skipped").Select(kv => kv.Key).ToList())
         {
@@ -606,9 +609,9 @@ public sealed class Tracker
         if (m.VehicleChestsMissing)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(L.T($"   ⚠ Fortnite n'a pas enregistré ce que ton véhicule a détruit dans ce replay (butin de {m.UnrecordedVehicleLoot} coffres sans coffre enregistré) : ils ne peuvent pas être comptés. Voir l'aide.",
-                $"   ⚠ Fortnite did not record what your vehicle destroyed in this replay (loot of {m.UnrecordedVehicleLoot} chests with no chest recorded): they cannot be counted. See the help tab.",
-                $"   ⚠ Fortnite no grabó lo que destruyó tu vehículo en esta repetición (botín de {m.UnrecordedVehicleLoot} cofres sin cofre grabado): no se pueden contar. Mira la ayuda."));
+            Console.WriteLine(L.T($"   ⚠ {m.UnrecordedVehicleLoot} tas de butin sans source confirmée près de ton véhicule. Le total peut être incomplet.",
+                $"   ⚠ {m.UnrecordedVehicleLoot} loot piles without a confirmed source along your vehicle's route. Your total may be incomplete.",
+                $"   ⚠ {m.UnrecordedVehicleLoot} montones de botín sin origen confirmado cerca de tu vehículo. El total puede estar incompleto."));
             Console.ResetColor();
         }
 

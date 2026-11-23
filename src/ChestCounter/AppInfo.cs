@@ -7,17 +7,17 @@ public static class AppInfo
 
     public static string VersionText => $"{Version.Major}.{Version.Minor}.{Math.Max(0, Version.Build)}";
 
-    public const string Repo = "LED-N/Fortnite-ChestCounter";
+    public const string Repo = "shonnino/TooManyChest";
     public static string RepoUrl => "https://github.com/" + Repo;
     public static string IssuesUrl => RepoUrl + "/issues";
 
-    /// <summary>Path of ChestCounter.exe when running as the published exe (null under "dotnet ChestCounter.dll").</summary>
+    /// <summary>Path of toomanychests.exe when running as the published exe (null under "dotnet ChestCounter.dll").</summary>
     public static string? ExePath
     {
         get
         {
             var p = Environment.ProcessPath;
-            return p != null && Path.GetFileName(p).Equals("ChestCounter.exe", StringComparison.OrdinalIgnoreCase) ? p : null;
+            return p != null && Path.GetFileName(p).Equals(Brand.Executable, StringComparison.OrdinalIgnoreCase) ? p : null;
         }
     }
 

@@ -9,7 +9,7 @@
     <CopyDocumentationFilesFromPackages>false</CopyDocumentationFilesFromPackages>
     <PublishDocumentationFiles>false</PublishDocumentationFiles>
     <PublishReferencesDocumentationFiles>false</PublishReferencesDocumentationFiles>
-    <AssemblyName>ChestCounter</AssemblyName>
+    <AssemblyName>toomanychests</AssemblyName>
     <RootNamespace>ChestCounter</RootNamespace>
     <Version>1.5.1</Version>
     <InvariantGlobalization>false</InvariantGlobalization>
@@ -20,18 +20,29 @@
     <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
     <TieredPGO>true</TieredPGO>
     <!-- The chest of the report, as the icon of the exe, its console window and the tray. -->
-    <ApplicationIcon>Assets\ChestCounter.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\toomanychests.ico</ApplicationIcon>
+    <Product>toomanychests</Product>
+    <Description>toomanychests</Description>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\lib\FortniteReplayReader\FortniteReplayReader.csproj" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
   </ItemGroup>
   <ItemGroup>
-    <!-- Report headings font (SIL Open Font License, see Assets/PirataOne-OFL.txt), embedded in the page: no download. -->
-    <EmbeddedResource Include="Assets\PirataOne-latin.woff2" LogicalName="PirataOne.woff2" />
+    <EmbeddedResource Include="Assets\BarlowCondensed-ExtraBold.ttf" LogicalName="interface.ttf" />
+    <EmbeddedResource Include="Assets\BarlowCondensed-Bold.ttf" LogicalName="secondary.ttf" />
+    <EmbeddedResource Include="Assets\ChestDigits.ttf" LogicalName="digits.ttf" />
+    <EmbeddedResource Include="Assets\ArchivoBlack-OFL.txt" />
+    <EmbeddedResource Include="Assets\BarlowCondensed-OFL.txt" />
+    <EmbeddedResource Include="Assets\Anton-Regular.ttf" LogicalName="wordmark.ttf" />
+    <EmbeddedResource Include="Assets\Anton-OFL.txt" />
+    <EmbeddedResource Include="Assets\toomanychests.png" LogicalName="brand.png" />
+    <EmbeddedResource Include="Assets\toomanychests.ico" LogicalName="brand.ico" />
+    <EmbeddedResource Include="Assets\Dashboard.css" LogicalName="dashboard.css" />
     <!-- What's new of this version: shown once after an update, and used as the GitHub release text (build.yml). -->
     <EmbeddedResource Include="..\..\RELEASE_NOTES.md" LogicalName="ReleaseNotes.md" />
     <!-- Treasure hunt data (weeks, prize ids, odds, Treasure Hours, notices): replaced at runtime by a newer copy from the repository. -->
     <EmbeddedResource Include="..\..\content\content.json" LogicalName="content.json" />
+    <EmbeddedResource Include="..\..\assets\treasures\*.*" LogicalName="treasure-image/%(Filename)%(Extension)" />
   </ItemGroup>
 </Project>

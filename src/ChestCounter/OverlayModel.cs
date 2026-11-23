@@ -57,17 +57,32 @@ public static class OverlayModel
             rows.Add(new OverlayRow(SquadLabel, L.Count(total + team, "coffre", "chest", "cofre")));
         }
         rows.Add(new OverlayRow(L.T("Trésors", "Treasures", "Tesoros"), $"★ {L.N(treasures)}", Treasure: true));
+        var tokenChance = TokenChance(d, live, DateTime.UtcNow);
+        rows.Add(new OverlayRow(TokenLabel, tokenChance));
 
         // Right counter: the match in progress when readable, "…" while it cannot be read yet, else the last match.
         if (live != null)
         {
-            return new OverlayView(L.N(total), L.N(live.ChestsOpened), L.T("partie en cours", "current match", "partida actual"), true, L.T("● EN DIRECT", "● LIVE", "● EN DIRECTO"), rows, L.N(treasures), L.N(session.Sum(m => m.ChestsOpened) + liveChests), last != null ? L.N(last.ChestsOpened) : null, squad);
+            return new OverlayView(L.N(total), L.N(live.ChestsOpened), L.T("partie en cours", "current match", "partida actual"), true, L.T("● EN DIRECT", "● LIVE", "● EN DIRECTO"), rows, L.N(treasures), L.N(session.Sum(m => m.ChestsOpened) + liveChests), last != null ? L.N(last.ChestsOpened) : null, squad, tokenChance);
         }
         if (inProgress)
         {
-            return new OverlayView(L.N(total), "…", L.T("en cours", "in progress", "en curso"), true, L.T("● PARTIE EN COURS", "● MATCH IN PROGRESS", "● PARTIDA EN CURSO"), rows, L.N(treasures), L.N(session.Sum(m => m.ChestsOpened) + liveChests), last != null ? L.N(last.ChestsOpened) : null, squad);
+            return new OverlayView(L.N(total), "…", L.T("en cours", "in progress", "en curso"), true, L.T("● PARTIE EN COURS", "● MATCH IN PROGRESS", "● PARTIDA EN CURSO"), rows, L.N(treasures), L.N(session.Sum(m => m.ChestsOpened) + liveChests), last != null ? L.N(last.ChestsOpened) : null, squad, tokenChance);
         }
-        return new OverlayView(L.N(total), last != null ? L.N(last.ChestsOpened) : null, LastMatchCaption, false, null, rows, L.N(treasures), L.N(session.Sum(m => m.ChestsOpened) + liveChests), last != null ? L.N(last.ChestsOpened) : null, squad);
+        return new OverlayView(L.N(total), last != null ? L.N(last.ChestsOpened) : null, LastMatchCaption, false, null, rows, L.N(treasures), L.N(session.Sum(m => m.ChestsOpened) + liveChests), last != null ? L.N(last.ChestsOpened) : null, squad, tokenChance);
+    }
+
+    public static string TokenLabel => L.T("Jeton pirate", "Pirate token", "Ficha pirata");
+
+    internal static string TokenChance(TrackerData data, MatchRecord? live, DateTime utc)
+    {
+        var odds = TreasureCatalog.Odds.FirstOrDefault(o => o.Kind == TreasureCatalog.PirateShop);
+        var total = data.TotalChests + (live?.ChestsOpened ?? 0);
+        if (total <= 0 || odds is null) return WeekendOdds.CumulativePercent(0);
+
+        var matches = live is null ? data.Matches : data.Matches.Append(live);
+        var times = WeekendOdds.ChestTimes(matches, utc).ToArray();
+        return WeekendOdds.CumulativePercent(WeekendOdds.AtLeastOne(odds, total, times, WeekendOdds.Schedule()));
     }
 
     /// <summary>Label of the squad total (the player + every teammate, duo, trio or squad).</summary>
