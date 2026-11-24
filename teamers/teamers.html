@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Crea una squadra, invita i tuoi amici e segui le chest delle partite insieme.">
+  <meta name="theme-color" content="#110e19">
+  <title>Teamers · ChestCounter</title>
+  <link rel="stylesheet" href="/teamers.css">
+  <script defer src="/teamers-charts.js"></script>
+  <script type="module" src="/teamers.js"></script>
+</head>
+<body>
+  <header class="top"><div class="wrap bar">
+    <a class="brand" href="/teamers"><span class="mark" aria-hidden="true">CC</span> ChestCounter</a>
+    <button id="sign-out" class="secondary" type="button" hidden>Scollega browser</button>
+  </div></header>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="title">
+      <div><h1 id="title">Teamers</h1><p>Invita i tuoi amici e tieni il conto delle chest che aprite giocando insieme.</p></div>
+      <div class="crest" aria-hidden="true"><span></span><span></span><span></span></div>
+    </section>
+    <p id="notice" class="notice" role="status" hidden></p>
+    <section id="welcome" class="panel intro" hidden>
+      <h2 id="welcome-title">Collega ChestCounter</h2>
+      <p id="welcome-text">Il sito usa il nome del profilo Epic e i conteggi di ChestCounter.</p>
+      <button id="connect" type="button">Collega all’app</button>
+      <div id="connect-box" hidden>
+        <a class="button" id="open-app" href="#" aria-describedby="open-help">Apri ChestCounter</a>
+        <p id="open-help">Il browser potrebbe chiederti di aprire l’app. Se la finestra non si apre, usa il codice qui sotto.</p>
+        <label for="connect-code">Codice di collegamento</label>
+        <div class="input-row"><input id="connect-code" readonly><button id="copy-code" type="button" class="secondary">Copia codice</button></div>
+        <p>Incollalo in <strong>ChestCounter → Teamers → Collega al sito</strong> e conferma. Il codice vale 10 minuti.</p>
+      </div>
+    </section>
+    <section id="main-view" class="grid" hidden>
+      <section class="panel score" aria-labelledby="team-name">
+        <p class="eyebrow">LA TUA SQUADRA</p>
+        <h2 id="team-name">Crea una squadra</h2>
+        <div id="score" hidden>
+          <p id="total" class="big">0</p><p class="score-label">Chest della squadra</p>
+          <dl class="figures">
+            <div><dt>Totale all’ingresso</dt><dd id="initial">0</dd></div>
+            <div><dt>Chest insieme</dt><dd id="shared">0</dd></div>
+            <div><dt>Partite insieme</dt><dd id="matches">0</dd></div>
+          </dl>
+          <p>Le partite contano quando giocano insieme almeno due membri.</p>
+          <div id="invite-box" hidden>
+            <h3>Invita amici</h3>
+            <p>Chi apre il link entra nella squadra se ha collegato ChestCounter e c’è posto.</p>
+            <button id="invite-link" type="button">Genera link d’invito</button>
+            <div id="invite-link-box" hidden>
+              <label for="share-link">Link d’invito</label>
+              <div class="input-row"><input id="share-link" readonly><button id="copy-invite" type="button">Copia</button></div>
+              <p>Vale 7 giorni. Generarne uno nuovo sostituisce quello precedente.</p>
+            </div>
+          </div>
+        </div>
+        <div id="create">
+          <p id="join-note">Collega ChestCounter per usare il tuo totale personale come punto di partenza.</p>
+          <form id="team-form"><label for="new-team">Nome squadra</label><div class="input-row">
+            <input id="new-team" name="name" required maxlength="40" placeholder="Nome della squadra">
+            <button id="create-button">Crea squadra</button>
+          </div></form>
+        </div>
+      </section>
+      <section class="panel side" aria-labelledby="device-title">
+        <p class="eyebrow">IL TUO PROFILO</p>
+        <h2 id="device-title"></h2>
+        <p id="device-state"></p>
+        <div id="personal-view" hidden>
+          <p id="personal-total" class="big">0</p><p>Totale personale</p>
+          <p id="my-contribution" hidden></p>
+          <p id="counting-pending" hidden>Apri la versione aggiornata di ChestCounter per sincronizzare le opzioni.</p>
+          <details id="counting" hidden>
+            <summary>Opzioni della tua quota Teamers</summary>
+            <form id="counting-form">
+              <fieldset id="count-fields" aria-label="Voci da includere">
+                <label class="check"><input type="checkbox" id="count-ammo"> Ammo Boxes</label>
+                <label class="check"><input type="checkbox" id="count-food"> Food Boxes</label>
+                <label class="check"><input type="checkbox" id="count-cannons"> Loot Cannons</label>
+                <label class="check"><input type="checkbox" id="count-manual"> Aggiunte manuali all’ingresso</label>
+              </fieldset>
+              <label for="count-starting">Saldo iniziale Teamers</label>
+              <input id="count-starting" type="number" min="0" max="50000000" step="1" required>
+              <button type="submit" class="secondary">Salva opzioni</button>
+            </form>
+          </details>
+        </div>
+      </section>
+      <section id="activity-panel" class="panel activity-panel" aria-labelledby="activity-title" hidden>
+        <div class="activity-heading">
+          <h2 id="activity-title">Dashboard Teamers</h2>
+          <div class="activity-actions" role="group" aria-label="Dati della dashboard">
+            <button class="secondary" type="button" id="activity-team" aria-pressed="true">Squadra</button>
+            <button class="secondary" type="button" id="activity-personal" aria-pressed="false">I tuoi replay</button>
+          </div>
+        </div>
+        <dl class="activity-metrics">
+          <div><dt>Aperte · distrutte</dt><dd id="activity-split">—</dd></div>
+          <div><dt>Media per partita</dt><dd id="activity-average">—</dd></div>
+          <div><dt>Partita migliore</dt><dd id="activity-best">—</dd></div>
+          <div><dt>Chest al minuto</dt><dd id="activity-rate">—</dd></div>
+          <div><dt>Ultima partita</dt><dd id="activity-last">—</dd></div>
+          <div><dt>Oggi</dt><dd id="activity-today">—</dd></div>
+          <div><dt>Tesori</dt><dd id="activity-treasures">—</dd></div>
+          <div><dt>Partite</dt><dd id="activity-matches">—</dd></div>
+        </dl>
+        <div class="activity-heading">
+          <h3 id="chart-title">Chest per partita</h3>
+          <div class="activity-actions" role="group" aria-label="Raggruppamento del grafico">
+            <button class="secondary" type="button" id="chart-match" aria-pressed="true">Per partita</button>
+            <button class="secondary" type="button" id="chart-day" aria-pressed="false">Per giorno</button>
+          </div>
+        </div>
+        <div id="chart-content" hidden>
+          <ul class="chart-legend" aria-label="Legenda">
+            <li>Aperte</li><li>Distrutte</li><li>Extra e conteggi storici</li>
+          </ul>
+          <canvas id="activity-canvas" aria-labelledby="chart-title" role="img"></canvas>
+          <p id="chart-detail">Ultime 100 partite disponibili.</p>
+        </div>
+        <p id="chart-empty">Nessuna partita disponibile per questa vista.</p>
+      </section>
+      <section id="member-panel" class="panel" aria-labelledby="member-title" hidden>
+        <h2 id="member-title">Membri</h2><ul id="members" class="rows"></ul>
+      </section>
+      <section class="panel side" aria-labelledby="invite-title">
+        <h2 id="invite-title">Inviti ricevuti</h2><p id="no-invites">Nessun invito in attesa.</p><ul id="invitations" class="rows"></ul>
+      </section>
+    </section>
+    <noscript><p>Attiva JavaScript per usare Teamers.</p></noscript>
+  </main>
+</body>
+</html>

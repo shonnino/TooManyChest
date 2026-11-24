@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ChestCounter</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Nullable>annotations</Nullable>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HudAssets/*" LogicalName="ChestCounter.Hud.%(Filename)%(Extension)" />
+    <None Remove="ChestCounter.Assets.social-instagram.png" />
+    <None Remove="ChestCounter.Assets.social-tiktok.png" />
+    <None Remove="ChestCounter.Assets.social-twitter.png" />
+    <None Remove="ChestCounter.Assets.social-youtube.png" />
+    <None Remove="ChestCounter.Assets.rewards.gizmo.png" />
+    <None Remove="ChestCounter.Assets.rewards.gold-outfit.png" />
+    <None Remove="ChestCounter.Assets.rewards.jam-track.png" />
+    <None Remove="ChestCounter.Assets.rewards.loading-screen.png" />
+    <None Remove="ChestCounter.Assets.rewards.pickaxe-back-bling.png" />
+    <None Remove="ChestCounter.Assets.rewards.pirate-shop-access.png" />
+    <None Remove="ChestCounter.Assets.rewards.vehicle-decal.png" />
+    <None Remove="ChestCounter.Assets.fonts.Anton-Regular.ttf" />
+    <None Remove="ChestCounter.Assets.fonts.Inter_28pt-Bold.ttf" />
+    <None Remove="ChestCounter.Assets.fonts.Inter_28pt-Regular.ttf" />
+    <None Remove="ChestCounter.Assets.2xflaw-banner.jpg" />
+    <EmbeddedResource Include="ChestCounter.Assets.social-instagram.png" LogicalName="ChestCounter.Assets.social-instagram.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.social-tiktok.png" LogicalName="ChestCounter.Assets.social-tiktok.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.social-twitter.png" LogicalName="ChestCounter.Assets.social-twitter.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.social-youtube.png" LogicalName="ChestCounter.Assets.social-youtube.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.rewards.gizmo.png" LogicalName="ChestCounter.Assets.rewards.gizmo.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.rewards.gold-outfit.png" LogicalName="ChestCounter.Assets.rewards.gold-outfit.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.rewards.jam-track.png" LogicalName="ChestCounter.Assets.rewards.jam-track.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.rewards.loading-screen.png" LogicalName="ChestCounter.Assets.rewards.loading-screen.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.rewards.pickaxe-back-bling.png" LogicalName="ChestCounter.Assets.rewards.pickaxe-back-bling.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.rewards.pirate-shop-access.png" LogicalName="ChestCounter.Assets.rewards.pirate-shop-access.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.rewards.vehicle-decal.png" LogicalName="ChestCounter.Assets.rewards.vehicle-decal.png" />
+    <EmbeddedResource Include="ChestCounter.Assets.fonts.Anton-Regular.ttf" LogicalName="ChestCounter.Assets.fonts.Anton-Regular.ttf" />
+    <EmbeddedResource Include="ChestCounter.Assets.fonts.Inter_28pt-Bold.ttf" LogicalName="ChestCounter.Assets.fonts.Inter_28pt-Bold.ttf" />
+    <EmbeddedResource Include="ChestCounter.Assets.fonts.Inter_28pt-Regular.ttf" LogicalName="ChestCounter.Assets.fonts.Inter_28pt-Regular.ttf" />
+    <EmbeddedResource Include="ChestCounter.Assets.2xflaw-banner.jpg" LogicalName="ChestCounter.Assets.2xflaw-banner.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../lib-teamers/FortniteReplayReader/FortniteReplayReader.csproj" />
+  </ItemGroup>
+</Project>

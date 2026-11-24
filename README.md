@@ -18,6 +18,15 @@
 
 TooManyChest is a customized fork of [LED-N's Fortnite Chest Counter](https://github.com/LED-N/Fortnite-ChestCounter). It uses the original version 1.5.1 replay counter and refreshes existing counts from replays still on disk.
 
+## Teamers edition
+
+The Teamers edition has its own Windows build and a companion site. It adds team invitations by link, a shared-match dashboard, and separate options for your contribution to the team. A completed replay played alone updates your personal total. A shared match counts once at least two team members report the same session.
+
+- [Open Teamers](https://chestcounter.lissomepika2.chatgpt.site/teamers)
+- [Build the Windows app and website](teamers/README.md)
+
+The download link above and the rest of this guide describe the original 1.5.1 edition.
+
 Chest Counter reads the replays Fortnite saves after each match and keeps a running count of the chests you opened, along with the **treasure hunt treasures** you got from your chests. A transparent overlay shows your figures over the game, like the rest of the HUD, and the counter's window keeps your whole history, your chances of getting the gold outfit and your collection of treasures.
 
 > It counts the chests **you opened**. It does not show where chests are on the map.
